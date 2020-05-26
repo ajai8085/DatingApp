@@ -10,3 +10,8 @@ To list down the commands supported
 Create the migration `dotnet ef migrations add InitialCreate`
 
 Note: Make sure that all the versions are same 
+Add migration 
+`dotnet ef migrations add AddedUserEntity`
+
+Per request 
+services.AddScoped
