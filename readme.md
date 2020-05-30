@@ -66,3 +66,15 @@ System.IdentityModel.Tokens.Jwt
 
 Adding authorization middleware to autothorize using the token 
 Microsoft.AspNetCore.Authentication.JwtBearer
+
+git rm --cached appsettings.json to remove it form git ignore 
+
+--Save dotnet secret 
+Initialize the dotnet secrets by running following command 
+we can remove , appsettings 
+
+dotnet user-secrets init
+dotnet user-secrets set "AppSettings:Token" "xxxxxx"
+dotnet user-secrets list
+
+in production we do not have access to user-secrets  , we need to have it in environment settings .
