@@ -15,3 +15,54 @@ Add migration
 
 Per request 
 services.AddScoped
+
+Validation
+-- Model state validation made easy by controller level `[ApiController]` attribute . Other wise we need to have following validation around every request handler 
+`if (!ModelState.IsValid)
+                return BadRequest(ModelState);`
+
+
+Attribute `[FromBody]` helps in identifying where to read the input from , unfortunately this will set all string to emptry string by default instead of null 
+
+Token Authentication 
+---------------------
+JWT token contains credentials and claims 
+header {"alg":"HS512", "type":"JWT"} {expiray}, secret , payload
+
+HEADER|PAYLOAD|SIGNATURE 
+Packckages for .net core 3.x
+Microsoft.IdentityModel.Tokens
+System.IdentityModel.Tokens.Jwt
+
+#Generating a jwt token example 
+
+`  var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userFormRepo.Id.ToString()),
+                new Claim(ClaimTypes.Name, userFormRepo.UserName)
+            };
+
+            // Generate the key for security 
+            var key = new SymmetricSecurityKey(Encoding.UTF8
+            .GetBytes(_config.GetSection("AppSettings:Token").Value));
+
+            //Create credentials out of the key 
+            var credes = new SigningCredentials(key, SecurityAlgorithms.Aes256CbcHmacSha512);
+
+            //Create token descriptor and add claims and signing credentials
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = credes
+            };
+
+            //Create taoken handler and generate token using token descriptor and write generated token to response 
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenToSend = new { token = tokenHandler.WriteToken(token) };
+            return Ok(tokenToSend);`
+
+
+Adding authorization middleware to autothorize using the token 
+Microsoft.AspNetCore.Authentication.JwtBearer
