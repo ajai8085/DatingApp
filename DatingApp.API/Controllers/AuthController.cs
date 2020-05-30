@@ -29,6 +29,12 @@ namespace DatingApp.API.Controllers
             _repository = repository;
         }
 
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Ok("hello world");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
