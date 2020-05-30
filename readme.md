@@ -78,3 +78,5 @@ dotnet user-secrets set "AppSettings:Token" "xxxxxx"
 dotnet user-secrets list
 
 in production we do not have access to user-secrets  , we need to have it in environment settings .
+
+#setting up global exception handler in asp.net core 
