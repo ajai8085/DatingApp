@@ -72,7 +72,7 @@ namespace DatingApp.API
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null)
                         {
-                            context.Response.AddApplicaitonError(error.Error.Message);
+                            context.Response.AddApplicaitonError(error?.Error?.Message);
                             await context.Response.WriteAsync(error.Error.Message);
                         }
                     });
