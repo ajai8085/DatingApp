@@ -1,28 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'Dating-SPA';
   values: any;
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.getValues();
+    this.authService.setDecodedToken();
   }
-
-  getValues() {
-    this.http.get('http://localhost:5000/values').subscribe(response => {
-      this.values = response;
-    }, error => {
-      console.log(error);
-    });
-  }
-
 }

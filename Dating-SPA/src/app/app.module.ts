@@ -11,6 +11,7 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceprtorProvider } from './services/ErrorInterceprtor.service';
+import { AlertifyService } from './services/alertify.service';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
@@ -21,7 +22,7 @@ import { ErrorInterceprtorProvider } from './services/ErrorInterceprtor.service'
     FormsModule,
     NgbModule,
   ],
-  providers: [AuthService, ErrorInterceprtorProvider],
+  providers: [AuthService, ErrorInterceprtorProvider, AlertifyService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
