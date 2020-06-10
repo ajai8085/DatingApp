@@ -12,7 +12,9 @@ export class AuthService {
   helper = new JwtHelperService();
   decodedToken: any;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.setDecodedToken();
+  }
 
   login(model: any) {
     return this.httpClient.post(this.baseUrl + 'login', model).pipe(
@@ -38,11 +40,13 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  setDecodedToken() {
-    const token = this.getToken();
-    if (token) {
-      this.decodedToken = this.helper.decodeToken(token);
-      console.log(this.decodedToken);
+  private setDecodedToken() {
+    if (!this.decodedToken) {
+      const token = this.getToken();
+      if (token) {
+        this.decodedToken = this.helper.decodeToken(token);
+        console.log(this.decodedToken);
+      }
     }
   }
 }

@@ -10,9 +10,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'Dating-SPA';
   values: any;
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.authService.setDecodedToken();
-  }
+  ngOnInit() {}
 }
