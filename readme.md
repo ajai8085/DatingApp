@@ -79,3 +79,5 @@ to unwrap the error user should be creating an error interceptor and unwrap the 
 install alertify and alertify types will not work (npm install @types/alertifyjs)
 However , to have the types , create a typing.d.ts add the line `declare module 'alertifyjs';`
 open up tsconfig.json and reference the file `typing.d.ts` to the compilier options add the array `"typeRoots": ["src/typings.d.ts"]`
+Routing , Protecting routes using guards etc
+Pathmatch : full , full path of url
