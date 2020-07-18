@@ -81,3 +81,4 @@ However , to have the types , create a typing.d.ts add the line `declare module 
 open up tsconfig.json and reference the file `typing.d.ts` to the compilier options add the array `"typeRoots": ["src/typings.d.ts"]`
 Routing , Protecting routes using guards etc
 Pathmatch : full , full path of url
+Route guards (Protecting with auth guards using child route )
