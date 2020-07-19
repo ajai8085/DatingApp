@@ -9,6 +9,26 @@ Create the migration `dotnet ef migrations add InitialCreate`
 Note: Make sure that all the versions are same
 Add migration
 `dotnet ef migrations add AddedUserEntity`
+Remove the added migration
+`dotnet ef migrations remove`
+Execute the database structure on the database 
+`dotnet ef database update`
+Revert the database update
+`dotnet ef database update "name of migration here eg: InitialCreate"`
+Drop database 
+`dotnet ef database drop`
+Seeding database example : 
+
+# Safe storage of sensitive information in .net core 
+1. Avoid the file to gitignore list gotot terminal window and `git rm appsettings.json --cached`
+2. Server in environmenet variables to store secrets information or use .net user secrets 
+3. execute the command to list down the option to store development secrets `dotnet user-secrets` ref more here in this link https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=linux
+4. These user secrets are only available when we are in development mode ie when Properties\launchSettings.json::ASPNETCORE_ENVIRONMENT is in production 
+`dotnet user-secrets init`
+`dotnet user-secrets list`
+`dotnet user-secrets set "AppSettings:Token" "here is my super secret"` now this value will be saved in 
+
+# DI
 
 Per request
 services.AddScoped
