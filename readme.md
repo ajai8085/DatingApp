@@ -11,22 +11,23 @@ Add migration
 `dotnet ef migrations add AddedUserEntity`
 Remove the added migration
 `dotnet ef migrations remove`
-Execute the database structure on the database 
+Execute the database structure on the database
 `dotnet ef database update`
 Revert the database update
 `dotnet ef database update "name of migration here eg: InitialCreate"`
-Drop database 
+Drop database
 `dotnet ef database drop`
-Seeding database example : 
+Seeding database example :
 
-# Safe storage of sensitive information in .net core 
+# Safe storage of sensitive information in .net core
+
 1. Avoid the file to gitignore list gotot terminal window and `git rm appsettings.json --cached`
-2. Server in environmenet variables to store secrets information or use .net user secrets 
+2. Server in environmenet variables to store secrets information or use .net user secrets
 3. execute the command to list down the option to store development secrets `dotnet user-secrets` ref more here in this link https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=linux
-4. These user secrets are only available when we are in development mode ie when Properties\launchSettings.json::ASPNETCORE_ENVIRONMENT is in production 
-`dotnet user-secrets init`
-`dotnet user-secrets list`
-`dotnet user-secrets set "AppSettings:Token" "here is my super secret"` now this value will be saved in 
+4. These user secrets are only available when we are in development mode ie when Properties\launchSettings.json::ASPNETCORE_ENVIRONMENT is in production
+   `dotnet user-secrets init`
+   `dotnet user-secrets list`
+   `dotnet user-secrets set "AppSettings:Token" "here is my super secret"` now this value will be saved in
 
 # DI
 
@@ -102,3 +103,8 @@ open up tsconfig.json and reference the file `typing.d.ts` to the compilier opti
 Routing , Protecting routes using guards etc
 Pathmatch : full , full path of url
 Route guards (Protecting with auth guards using child route )
+
+Fix error ENOSPC: System limit for number of file watchers reached
+`$ sudo sysctl fs.inotify.max_user_watches=524288 $ sudo sysctl -p`
+make these changes permanent
+`$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf $ sudo sysctl -p`

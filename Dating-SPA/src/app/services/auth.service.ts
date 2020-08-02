@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/auth/';
+  logOut() {
+    localStorage.removeItem('access_token');
+  }
+  baseUrl = environment.apiUrl + 'auth/';
 
   helper = new JwtHelperService();
   decodedToken: any;
@@ -21,7 +25,8 @@ export class AuthService {
       map((resp: any) => {
         const user = resp;
         if (user) {
-          localStorage.setItem('token', user.token);
+          this.decodedToken = null;
+          localStorage.setItem('access_token', user.token);
           this.setDecodedToken();
         }
       })
@@ -37,7 +42,7 @@ export class AuthService {
   }
 
   getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
   }
 
   private setDecodedToken() {

@@ -10,12 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { ErrorInterceprtorProvider } from './services/ErrorInterceprtor.service';
+import { ErrorInterceprtorProvider } from './services/errorInterceprtor.service';
 import { AlertifyService } from './services/alertify.service';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { AuthGuard } from './guards/auth.guard';
     MemberListComponent,
     ListsComponent,
     MessagesComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +38,15 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    JwtModule.forRoot({
+      config: {
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: ['localhost:5000/login'],
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+      },
+    }),
   ],
   providers: [
     AuthService,
